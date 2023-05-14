@@ -89,9 +89,9 @@ Usage:
 		    The Realigner module realigns the remapped pairs to each STR locus, and generates a plain text file indicating how each pair is realigned.
 		    The running speed is affected by both library size and number of STRs. For heavy duty work, the Realigner module allows multi-processing mode.
 		    See Step (1.2) and (2) for input requirements, and Step (3) for more details of the output.
-	  Usage Sample (single process, read length = ~ 150bp):
+	  Usage Sample (single process, read length = about 150bp):
 		    perl LUSTR_Realigner.pl -s <STRsequences.txt> -i <remapped.bam> -o <realign.txt>
-	  Usage Sample (single process, read length = ~ 100bp):
+	  Usage Sample (single process, read length = about 100bp):
 		    perl LUSTR_Realigner.pl -s <STRsequences.txt> -i <remapped.bam> -o <realign.txt> --repeatm 0.15 --repeate 0.4 -d 100
 	  Usage Sample (multiple parallel processes):
 		    perl LUSTR_Realigner.pl -s <STRsequences.txt> -i <remapped.bam> -o <realign.txt> -m 3 -n 1
@@ -106,11 +106,11 @@ Usage:
 					                    (Default = --fr)
 		    --flank/-f <value>	  Maximum length to search for flankings
 					                    A setting of the minimum mapping length used in previous step plus 20nt or more is recommended
-					                    By default bwa mem requires ~30nt as the minimum mapping length to export the hits
+					                    By default bwa mem requires about 30nt as the minimum mapping length to export the hits
 					                    (Default = 50)
 		    --seed <value>  		  Seed length to search for flankings. A setting of 7 is recommended for best performance (Default = 7)
 		    --untrust1 <value>	  Length threshold of short flankings to enter further check by looking into nearby repeat sequences (Default = 15)
-		    --reliab/-r <value>	  Reliability score threshold (0~1) to decide whether to remark short flankings as repeats
+		    --reliab/-r <value>	  Reliability score threshold (0 to 1) to decide whether to remark short flankings as repeats
 					                    Effective for --untrust1 and remark only when acceptable
 					                    (Default = 0.8)
 		    --untrust2 <value>	  Length threshold of short flankings to enter further check by looking into other supportive pairs
@@ -121,10 +121,10 @@ Usage:
 		    --clipi <value> 		  Length threshold to ignore inwards (towards the repeats) short clips on the flankings
 					                    For bwa mem default settings, 10 is recommended
 				                  	  (Default = 10)  
-		    --repeatm <value>	    Threshold of repeat ratio to read length (0~1) to initiate extension from remapped hits
+		    --repeatm <value>	    Threshold of repeat ratio to read length (0 to 1) to initiate extension from remapped hits
 					                    A setting = 0.75-2*(minimum mapping length)/readlength is recommended
 					                    (Default = 0.35)
-		    --repeate <value>	    Threshold of repeat ratio to read length (0~1) to accept the repeats
+		    --repeate <value>	    Threshold of repeat ratio to read length (0 to 1) to accept the repeats
 					                    A setting = 1-2*(minimum mapping length)/readlength is recommended
 					                    (Default = 0.6)
 		    --back/-b <value>	    Length to step back from remapped ends of reads hitting on repeat references, to search for flankings (Default = 5)
@@ -134,7 +134,7 @@ Usage:
 		    --down/-d <value>	    Maximum length of periodic Smith-Waterman extension of repeats towards 3' end of reads
 					                    A setting of read length is recommended considering sequencing errors
 					                    (Default = 150)
-		    --kratio <value>	    Threshold of repeat ratio to read length (0~1) to initiate search for potential repeat units by k-mer method
+		    --kratio <value>	    Threshold of repeat ratio to read length (0 to 1) to initiate search for potential repeat units by k-mer method
 					                    The k-mer search will cost big running time. Apply it when the STR list is small and a deep realignment is required
                               To apply, a setting = 0.8-2*(minimum mapping length)/readlength is recommended
 					                    (Default = 0.4, but will be disabled if neither --kratio nor --kcandi is present)
@@ -173,7 +173,7 @@ Usage:
 		    --reliabest2 <value>	Setting of the longer flanking length threshold to determine reliability for repeats longer than read length (Default = 40)
 		    --reliabest3 <value>	Setting of the reads number threshold to determine reliability for alleles longer than read length (Default = 2)
 	    	--biasn <value>	    	Reads number threshold for flank bias detection (Default = 20)
-		    --biasr <value>		    Calculation ratio threshold (0~1, no bias to complete bias) for flank bias detection (Default = 0.8)
+		    --biasr <value>		    Calculation ratio threshold (0 to 1, no bias to complete bias) for flank bias detection (Default = 0.8)
 		    --offtarget	        	Switch on single side analysis if flank bias detected (Default = off, but recommended for STRs with high risk of offtargets)
 		    --sub/-s <string>	    Switch on a sub output for STR candidates with variations beyond the provided threshold
 					                    Use a number or number+"r" to set threshold for repeat number variation, or number+"n" for nucleotide length variation

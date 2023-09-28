@@ -96,7 +96,7 @@ Usage:
 					(Default = 50)
 		--seed <value>		Seed length to search for flankings. A setting of 7 is recommended for best performance (Default = 7)
 		--untrust1 <value>	Length threshold of short flankings to enter further check by looking into nearby repeat sequences (Default = 15)
-		--reliab/-r <value>	Reliability score threshold (0~1) to decide whether to remark short flankings as repeats
+		--reliab/-r <value>	Reliability score threshold (0 to 1) to decide whether to remark short flankings as repeats
 					Effective for --untrust1 and remark only when acceptable
 					(Default = 0.8)
 		--untrust2 <value>	Length threshold of short flankings to enter further check by looking into other supportive pairs
@@ -120,7 +120,7 @@ Usage:
 		--down/-d <value>	Maximum length of periodic Smith-Waterman extension of repeats towards 3' end of reads
 					A setting of read length is recommended considering sequencing errors
 					(Default = 150)
-		--kratio <value>	Threshold of repeat ratio to read length (0~1) to initiate search for potential repeat units by k-mer method
+		--kratio <value>	Threshold of repeat ratio to read length (0 to 1) to initiate search for potential repeat units by k-mer method
 					The k-mer search will cost big running time. Apply it when the STR list is small and a deep realignment is required
 					To apply, a setting = 0.8-2*(minimum mapping length)/readlength is recommended
 					(Default = 0.4, but will be disabled if neither --kratio nor --kcandi is present)
@@ -159,7 +159,7 @@ Usage:
 		--reliabest2 <value>	Setting of the longer flanking length threshold to determine reliability for repeats longer than read length (Default = 40)
 		--reliabest3 <value>	Setting of the reads number threshold to determine reliability for alleles longer than read length (Default = 2)
 		--biasn <value>		Reads number threshold for flank bias detection (Default = 20)
-		--biasr <value>		Calculation ratio threshold (0~1, no bias to complete bias) for flank bias detection (Default = 0.8)
+		--biasr <value>		Calculation ratio threshold (0 to 1, no bias to complete bias) for flank bias detection (Default = 0.8)
 		--offtarget		Switch on single side analysis if flank bias detected (Default = off, but recommended for STRs with high risk of offtargets)
 		--sub/-s <string>	Switch on a sub output for STR candidates with variations beyond the provided threshold
 					Use a number or number+"r" to set threshold for repeat number variation, or number+"n" for nucleotide length variation

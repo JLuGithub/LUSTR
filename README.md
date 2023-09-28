@@ -92,7 +92,7 @@ Usage:
 					(Default = --fr)
 		--flank/-f <value>	Maximum length to search for flankings
 					A setting of the minimum mapping length used in previous step plus 20nt or more is recommended
-					By default bwa mem requires ~30nt as the minimum mapping length to export the hits
+					By default bwa mem requires about 30nt as the minimum mapping length to export the hits
 					(Default = 50)
 		--seed <value>		Seed length to search for flankings. A setting of 7 is recommended for best performance (Default = 7)
 		--untrust1 <value>	Length threshold of short flankings to enter further check by looking into nearby repeat sequences (Default = 15)
@@ -107,10 +107,10 @@ Usage:
 		--clipi <value>		Length threshold to ignore inwards (towards the repeats) short clips on the flankings
 					For bwa mem default settings, 10 is recommended
 					(Default = 10)  
-		--repeatm <value>	Threshold of repeat ratio to read length (0~1) to initiate extension from remapped hits
+		--repeatm <value>	Threshold of repeat ratio to read length (0 to 1) to initiate extension from remapped hits
 					A setting = 0.75-2*(minimum mapping length)/readlength is recommended
 					(Default = 0.35)
-		--repeate <value>	Threshold of repeat ratio to read length (0~1) to accept the repeats
+		--repeate <value>	Threshold of repeat ratio to read length (0 to 1) to accept the repeats
 					A setting = 1-2*(minimum mapping length)/readlength is recommended
 					(Default = 0.6)
 		--back/-b <value>	Length to step back from remapped ends of reads hitting on repeat references, to search for flankings (Default = 5)

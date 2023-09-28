@@ -1,0 +1,52 @@
+For a quick guidance, we include three test_* files under folder testdata/. Users can use these files and follow step-by-step below to complete a full process to genotype a 30% mosaic C9orf72 STR expansion allele.
+
+=========================================================
+
+Test file list:
+
+test_genome_hg19_chr9_27571483_27575544.fa - sequence from hg19 genome containing C9orf72 STR
+test_STRinfo.txt - the information of C9orf72 STR. The position columns can vary as long as it can cover enough repeat seeds to initiate searching
+test_pairendreads_C9orf72_ref70exp30.fastq - pair-end reads generated from 70% reference C9orf72 STR allele and 30% expanded (+100 repeats) allele
+
+=========================================================
+
+Steps:
+
+(1) Index the genome reference with samtools:
+
+samtools faidx test_genome_hg19_chr9_27571483_27575544.fa
+
+(2) Run Finder module to obtain STR repeat and flanking sequences:
+
+perl LUSTR_Finder.pl -r test_genome_hg19_chr9_27571483_27575544.fa \
+--refindex test_genome_hg19_chr9_27571483_27575544.fa.fai \
+-i test_STRinfo.txt -o test_STRref.txt -e 100
+
+(3) Create STR references for mapping:
+
+perl LUSTR_RefCreator.pl -i test_STRref.txt
+
+(4) Map raw reads to STR references. Here we use bwa as an example:
+
+bwa index test_STRref.txt.fa
+
+bwa mem test_STRref.txt.fa test_pairendreads_C9orf72_ref70exp30.fastq \
+-D 0.01 -P -a -p | samtools view -bS > test.bam
+
+(5) Realign mapped reads to C9orf72 STR:
+
+perl LUSTR_Realigner.pl -s test_STRref.txt -i test.bam -o test_realign.txt
+
+(6) Genotype the STR alleles:
+
+perl LUSTR_Caller.pl -i test_realign.txt -o test_call.txt --offtarget
+
+===============================================================
+
+After running the steps above, users may see the following or close (dependent on the mapping tools used) results:
+
+10.3	D	High	71+-5
+105.6	I	High	29+-5
+121.8	I+	High	29+-5
+
+These indicating calls for one C9orf72 STR allele with 10.3 repeats (reference, +0) by 71%, and one allele estimated between 105.6 to 121.8 repeats (expansion, +100) by 29%. 
